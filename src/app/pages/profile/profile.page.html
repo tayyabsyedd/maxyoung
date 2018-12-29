@@ -1,0 +1,169 @@
+<app-header></app-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" class="lt">
+        <div class="img-outer">
+          <div class="profilePic" [ngStyle]="{'background-image': 'url(' + userProfile.pictureURL + ')'}">
+            <ion-icon name="create" class="edit-pic" *ngIf="isEdit"></ion-icon>
+          </div>
+        </div>
+        <div class="rating">
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>
+          <ion-icon name="star" color="primary"></ion-icon>(10)
+        </div>
+      </ion-col>
+      <ion-col size="6" *ngIf="!isEdit">
+        <ion-item>
+          <strong>{{userProfile.firstName}} {{userProfile.lastName}}</strong>
+        </ion-item>
+        <ion-item>
+          <strong position="floating">
+            24 Years Old <ion-icon name="man" *ngIf="userProfile.gender == 'male'"></ion-icon>
+            <ion-icon name="woman" *ngIf="userProfile.gender == 'female'"></ion-icon>
+          </strong>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="isEdit">
+        <ion-label>First Name</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.firstName' type="text" placeholder="First name" value="{{userProfile.firstName}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+        <ion-label>Last Name</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.lastName' type="text" placeholder="Last name" value="{{userProfile.lastName}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" *ngIf="!isEdit">
+        <ion-item>
+          <strong>john@email.com</strong>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="isEdit">
+        <ion-label>Email</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.email' type="text" placeholder="First name" value="{{userProfile.email}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="!isEdit">
+        <ion-item>
+          <strong>Trainer</strong>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="isEdit">
+        <ion-label>Type</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.type' type="text" placeholder="Type" value="{{userProfile.type}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" *ngIf="isEdit">
+        <ion-label>Age</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.age' type="text" placeholder="Age" value="{{userProfile.age}}" disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" *ngIf="isEdit">
+        <ion-label>Gender</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.gender' type="text" placeholder="Gender" value="{{userProfile.gender}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+    <ion-row *ngIf="!isEdit">
+      <ion-col size="4">
+        <ion-item>
+          <strong>Address: </strong>
+        </ion-item>
+      </ion-col>
+      <ion-col size="8">
+        <ion-item>
+          <strong>Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi</strong>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isEdit">
+      <ion-col size="12">
+        <ion-item>
+          <strong>Address:</strong>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>City</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.address[0].city' type="text" placeholder="City" value="{{userProfile.address[0].city}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-label>State</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.address[0].state' type="text" placeholder="State" value="{{userProfile.address[0].state}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-label>Steet</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.address[0].street' type="text" placeholder="Street" value="{{userProfile.address[0].street}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-label>Zip</ion-label>
+        <ion-item>
+          <ion-input [(ngModel)]='userProfile.address[0].zip' type="text" placeholder="Zip" value="{{userProfile.address[0].zip}}"
+            disabled="{{!isEdit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-button shape="round" color="primary" fill="outline" *ngIf="!isEdit" (click)="onEditProfile()">
+          <ion-icon name="create"></ion-icon> Edit
+        </ion-button>
+        <ion-button shape="round" color="secondary" fill="outline" size="small" *ngIf="isEdit" (click)="onUpdateProfile()">
+          <ion-icon name="checkmark"></ion-icon> Update
+        </ion-button>
+        <ion-button shape="round" color="warning" fill="outline" size="small" *ngIf="isEdit" (click)="onCancelEdit()">
+          <ion-icon name="close-circle"></ion-icon> Cancel
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<app-footer></app-footer>

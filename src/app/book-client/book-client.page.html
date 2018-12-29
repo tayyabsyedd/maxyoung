@@ -1,0 +1,52 @@
+<app-header></app-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Book Client</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>About {{selectedTrainer.name}} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div text-center align-items-center padding>
+              <img src="{{selectedTrainer.imgPath}}" alt="{{selectedTrainer.name}}">
+            </div>
+            <div>
+              <h6>{{selectedTrainer.name}}</h6>
+              <p>{{selectedTrainer.discription}}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <strong>
+          {{selectedTrainer.name}} is on their way, go ahead and warm up
+        </strong>
+        <div id="success">
+          <div class="check_mark">
+            <div class="sa-icon sa-success animate" [ngClass]="{'hide': isSuccess }">
+              <span class="sa-line sa-tip animateSuccessTip"></span>
+              <span class="sa-line sa-long animateSuccessLong"></span>
+              <div class="sa-placeholder"></div>
+              <div class="sa-fix"></div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<app-footer></app-footer>
